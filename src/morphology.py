@@ -164,12 +164,10 @@ def main():
     # print(size_tag)
 
     elements, imglist, corresp_list = headers_para(doc, size_tag)
-    # print(len(imglist))
-    # print(len(corresp_list))
-    # for i in range(len(imglist)):
-    #     print(corresp_list[i])
-    #     image = Image.open(io.BytesIO(imglist[i]))
-    #     imgname = str(corresp_list[i])
+    for i in range(len(imglist)):
+        print(corresp_list[i])
+        # image = Image.open(io.BytesIO(imglist[i]))
+        imgname = str(corresp_list[i])
     #     imgname = imgname.replace('<h3>','')
     #     imgname = imgname.replace('|','')
     #     image.save('images/'+ imgname + '.png')
@@ -200,8 +198,8 @@ def main():
                 print(line)
                 break
     '''
-    with open("doc.json", 'w') as json_out:
-        json.dump(elements, json_out)
+    # with open("doc.json", 'w') as json_out:
+    #     json.dump(elements, json_out)
 
 if __name__ == '__main__':
     main()
