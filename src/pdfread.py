@@ -37,7 +37,7 @@ def get_text():
 def get_tables():
     # tables = camelot.read_pdf(file, pages = "1-end")
     # tables.export("tables/output_tables.csv", f = "csv")
-    tabula.convert_into(file,"tables/output.xlsx",output_format='xlsx',pages='all')
+    tabula.convert_into(file,"tables/output.csv",output_format='csv',pages='all')
 
 
 def get_images():

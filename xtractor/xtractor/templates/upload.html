@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h2>Upload</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="document">
+    <button type="submit">Upload file</button>
+  </form>
+  {% if url %}
+    <p>Uploaded file: <a href="{{ url }}">{{ url }}</a></p>
+  {% endif %}
+  <input type="text" id="searchbar" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+  <table class="table mb-0" id="myTable">
+    <thead>
+      <tr>
+        <th>Headings extracted</th>
+        <th>Content</th>
+        <th>Images</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for file in files %}
+    <tr>
+      <td>{{file.title}}</td>
+      <td>{{file.content}}</td>
+      {% for image in file.images %}
+      <td>
+        <div class="imageContainer">
+          <img src="{{image}}" height="150" width="150">
+        </div>
+        <br>
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("searchbar");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+    </script>
+{% endblock %}

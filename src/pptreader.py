@@ -1,4 +1,4 @@
-from pptx import Presentation
+# from pptx import Presentation
 import sys
 import fitz
 import re
@@ -12,10 +12,6 @@ except ImportError:
     from bs4 import BeautifulSoup as bs
 
 filename = sys.argv[1]
-# prs = Presentation(filename)
-# for slide in prs.slides:
-#     title = slide.shapes.title
-#     print(title)
 doc = fitz.open(filename)
 for page in doc:
     titles = []
@@ -40,16 +36,22 @@ for page in doc:
     text.sort(key = lambda x : x[1], reverse=True)
     try:
         title = text[0][0]
+        content = text[1:]
+        # print(content[0])
+        content = [x[0] for x in content]
         count = 1
-        for image in parsed_html.body.find_all('img'):
-            image_bytes = image['src']
-            filetype = image_bytes.split(',')[0]
-            # if 'jpeg' in filetype or 'jpg' in filetype:
-            image_bytes = image_bytes.split(',')[1]
-            img = base64.b64decode(image_bytes)
-            img = Image.open(io.BytesIO(img))
-            img.save('images/' + title + '_' + str(count), "png")
-            count+=1
+        print("Title : ", format(title))
+        print("Content :", format(content))
+        print("\n")
+        # for image in parsed_html.body.find_all('img'):
+        #     image_bytes = image['src']
+        #     filetype = image_bytes.split(',')[0]
+        #     # if 'jpeg' in filetype or 'jpg' in filetype:
+        #     image_bytes = image_bytes.split(',')[1]
+        #     img = base64.b64decode(image_bytes)
+        #     img = Image.open(io.BytesIO(img))
+        #     img.save('images/' + title + '_' + str(count), "png")
+        #     count+=1
     except KeyError:
         print("No titles on this page")
     
