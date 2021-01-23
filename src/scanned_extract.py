@@ -4,17 +4,20 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import csv
 from PIL import Image
+import sys
 import pytesseract
 
 
-file = r't_page1.png'
+file = sys.argv[1]
+
 img = cv2.imread(file,0)
 print(img.shape)
 
+
 thresh,img_bin = cv2.threshold(img,128,255,cv2.THRESH_BINARY|cv2.THRESH_OTSU)
 img_bin = 255-img_bin
-cv2.imwrite('inverted_file.png',img_bin)
 
+# cv2.imwrite('inverted_file.png',img_bin)
 # plotting = plt.imshow(img_bin,cmap = 'gray')
 # plt.show()
 
@@ -27,13 +30,14 @@ kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (2,2))
 
 image1 = cv2.erode(img_bin, ver_kernel, iterations =3)
 vertical_lines = cv2.dilate(image1, ver_kernel, iterations=3)
-# cv2.imwrite('vertical.jpg', vertical_lines)
 
+# cv2.imwrite('vertical.jpg', vertical_lines)
 # plotting = plt.imshow(image1,cmap = 'gray')
 # plt.show()
 
 image2 = cv2.erode(img_bin, hor_kernel, iterations =3)
 horizontal_lines = cv2.dilate(image2, hor_kernel, iterations=3)
+
 # cv2.imwrite('horizontal.jpg', horizontal_lines)
 
 img_vh = cv2.addWeighted(vertical_lines, 0.5, horizontal_lines,0.5,0.0)
@@ -154,6 +158,5 @@ for i in range(len(finalboxes)):
 arr = np.array(outer)
 dataframe = pd.DataFrame(arr.reshape(len(row),countcol))
 print(dataframe)
-# data = dataframe.style.set_properties(align="left")
-#Converting it in a excel-file
+#Converting it into a csv file
 dataframe.to_csv('file.csv')

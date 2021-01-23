@@ -10,7 +10,9 @@
   {% if url %}
     <p>Uploaded file: <a href="{{ url }}">{{ url }}</a></p>
   {% endif %}
-  <input type="text" id="searchbar" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+  <br>
+  <input type="text" id="searchbar" onkeyup="myFunction()" placeholder="Enter keywords.." title="Type in a keyword">
+  <br>
   <table class="table mb-0" id="myTable">
     <thead>
       <tr>
@@ -21,7 +23,11 @@
     </thead>
     <tbody>
     {% for file in files %}
+
     <tr>
+      <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <td><button type="submit">Save</button></td>
       <td>{{file.title}}</td>
       <td>{{file.content}}</td>
       {% for image in file.images %}
@@ -32,6 +38,7 @@
         <br>
       </td>
       {% endfor %}
+    </form>  
     </tr>
     {% endfor %}
     </tbody>

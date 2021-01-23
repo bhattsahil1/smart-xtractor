@@ -1,9 +1,9 @@
 from django import forms
 
-from .models import Book
+from .models import Section
 
 
-class BookForm(forms.ModelForm):
+class SectionForm(forms.ModelForm):
     class Meta:
-        model = Book
-        fields = ('title', 'author', 'pdf', 'cover')
+        model = Section
+        fields = ('title', 'content','image')

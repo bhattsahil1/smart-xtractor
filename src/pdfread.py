@@ -40,6 +40,7 @@ def get_tables():
     tabula.convert_into(file,"tables/output.csv",output_format='csv',pages='all')
 
 
+##Function to extract images
 def get_images():
     doc = fitz.open(file)
     img_count = 0
@@ -56,9 +57,9 @@ def get_images():
             # save it to local disk
             image.save(open(f"images/image{img_count}.{image_ext}", "wb"))
 
-# print("Extracting Images...")
-# get_images()
+print("Extracting Images...")
+get_images()
 print("Extracting Tables...")
 get_tables()
-# print("Extracting Text...")
-# get_text()r
+print("Extracting Text...")
+get_text()
