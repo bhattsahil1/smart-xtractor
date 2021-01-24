@@ -11,7 +11,7 @@ The other modules deal with identifying morphology of the unstructured document 
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites and Installation
 
@@ -60,4 +60,4 @@ python3 scanned_extract.py <filepath>
 The output will be stored in the same directory as a csv file.  
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
